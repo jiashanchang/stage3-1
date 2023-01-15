@@ -1,5 +1,4 @@
-const showImage = document.querySelector(".showImage");
-
+const under = document.querySelector(".under");
 // 取得圖片
 async function getHeadshot() {
   const response = await fetch("api/headshot", {
@@ -12,6 +11,9 @@ async function getHeadshot() {
       let photo = getPhoto.data[i].photo;
       let text = getPhoto.data[i].text;
 
+      const container = document.createElement("div");
+      container.setAttribute("class", "container");
+
       const allText = document.createElement("div");
       allText.setAttribute("class", "text");
       const textElement = document.createTextNode(text);
@@ -21,14 +23,16 @@ async function getHeadshot() {
 
       const line = document.createElement("hr");
 
-      showImage.appendChild(line);
-      showImage.appendChild(allText);
+      container.appendChild(line);
+      container.appendChild(allText);
       allText.appendChild(textElement);
-      showImage.appendChild(allImage); 
+      container.appendChild(allImage);
+      under.insertAdjacentElement("afterend", container);
     }
   }
 }
 getHeadshot();
+
 // 輸入文字內容
 let inputValue;
 const word = document.getElementById("word");
@@ -67,8 +71,29 @@ confirmUpload.addEventListener("click", () => {
           return response.json();
         })
         .then(function (upload) {
-          if (upload.ok) {
+          if (upload) {
             alert("上傳成功");
+            const returnText = upload.text;
+            const returnPhoto = upload.photo;
+            const container = document.createElement("div");
+            container.setAttribute("class", "container");
+
+            const allText = document.createElement("div");
+            allText.setAttribute("class", "text");
+            const textElement = document.createTextNode(returnText);
+      
+            const allImage = document.createElement("img");
+            allImage.setAttribute("src", "https://d3njnkd7r25n5m.cloudfront.net/" + returnPhoto);
+      
+            const line = document.createElement("hr");
+      
+            container.appendChild(line);
+            container.appendChild(allText);
+            allText.appendChild(textElement);
+            container.appendChild(allImage);
+            under.insertAdjacentElement("afterend", container);
+            document.getElementById("word").value = "";
+            document.getElementById("choosePhoto").value = "";
           } else {
             alert("上傳失敗");
           }

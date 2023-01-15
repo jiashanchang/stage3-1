@@ -4,6 +4,7 @@ import boto3
 import os
 from dotenv import load_dotenv
 from mysql.connector import Error
+import uuid
 
 load_dotenv()
 
@@ -62,7 +63,7 @@ def upload_headshot():
                     "error": True,
                     "message": "請輸入訊息文字"
                 })
-            file_name = file.filename
+            file_name = str(uuid.uuid4())
             client.upload_fileobj(
                 file,
                 BUCKET_NAME,
@@ -71,8 +72,8 @@ def upload_headshot():
             cursor.execute("INSERT INTO `data` (`images`, `description`) VALUES (%s, %s);",[file_name, text])
             connection_object.commit()
             return jsonify({
-                "ok": True,
-                "message": "圖片上傳成功"
+                "text": text,
+                "photo": file_name
             })
 
     except Error as e:

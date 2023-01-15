@@ -8,27 +8,23 @@
     <title>發表一篇圖文</title>
   </head>
   <body>
-    <div>發表一篇圖文</div>
-    <div>
-      文字內容
-      <input
-        type="text"
-        placeholder="選擇一張圖片後送出"
-        id="word"
-        class="textWord"
-      />
+    <div class="under">
+      <div>發表一篇圖文</div>
+      <div>
+        文字內容
+        <input
+          type="text"
+          placeholder="選擇一張圖片後送出"
+          id="word"
+          class="textWord"
+        />
+      </div>
+      <div>圖片檔案</div>
+      <form enctype="multipart/form-data" target="theiframe">
+        <input type="file" id="choosePhoto" accept="image/*" />
+      </form>
+      <button class="confirmUpload">送出</button>
     </div>
-    <div>圖片檔案</div>
-    <form enctype="multipart/form-data" target="theiframe">
-      <input type="file" id="choosePhoto" accept="image/*" />
-    </form>
-    <button class="confirmUpload">送出</button>
-    <div class="content">
-      <img class="headshot" />
-    </div>
-    <div class="showImage"></div>
-
-    <iframe id="theiframe" name="theiframe"></iframe>
   </body>
   <script type="text/javascript" src="/static/index.js"></script>
 </html>
