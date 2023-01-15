@@ -1,0 +1,13 @@
+.headshot {
+    width: 200px;
+    height: 80%;
+}
+
+#theiframe {
+    display: none;
+}
+
+.showImage img {
+    width: 200px;
+    height: 80%;
+}
